@@ -21,3 +21,8 @@ export type User = {
   certs: string[];
   intentos: number;
 };
+
+export type Message = {
+  message: string;
+  visible: boolean;
+};

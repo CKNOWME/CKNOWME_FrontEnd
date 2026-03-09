@@ -1,7 +1,10 @@
-import Register from "../../components/Register.tsx";
+import RegisterIsland from "../../islands/RegisterIsland.tsx";
 
 const RegisterPage = () => {
-  return <Register />;
-};
-
+    return (
+        <div className="flex items-center justify-center min-h-screen bg-gray-100">
+            <RegisterIsland />
+        </div>
+    );
+}  
 export default RegisterPage;

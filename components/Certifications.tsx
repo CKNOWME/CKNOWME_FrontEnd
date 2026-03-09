@@ -3,7 +3,7 @@ import { Certificate } from "../types.ts";
 import CertCard from "./CertCard.tsx";
 
 const getCerts = async (): Promise<Certificate[]> => {
-  const res = await fetch("/api/certs");
+  const res = await fetch("/api/certificate");
   return res.json();
 };
 
@@ -33,7 +33,6 @@ export default function Certifications() {
     return map;
   }, [certs]);
 
-  // date is Unix timestamp in ms
   const thisYearCount = useMemo(
     () => certs.filter((c) => new Date(c.date).getFullYear() === THIS_YEAR).length,
     [certs],
@@ -55,9 +54,6 @@ export default function Certifications() {
       return catOk && termOk;
     });
   }, [certs, filter, search]);
-
-  const handleDelete = (id: string) =>
-    setCerts((prev) => prev.filter((c) => c.id !== id));
 
   return (
     <>
@@ -91,6 +87,7 @@ export default function Certifications() {
       <div class="toolbar">
         <div class="filters">
           <button
+            type="button"
             class={`f-btn${filter === "all" ? " on" : ""}`}
             onClick={() => setFilter("all")}
           >
@@ -99,6 +96,7 @@ export default function Certifications() {
           {certTypes.map((cat) =>
             (countByType[cat] ?? 0) > 0 && (
               <button
+                type="button"
                 key={cat}
                 class={`f-btn${filter === cat ? " on" : ""}`}
                 onClick={() => setFilter(cat)}

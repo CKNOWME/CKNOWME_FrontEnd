@@ -1,4 +1,3 @@
-import { addCert } from "../utils.ts";
 
 const Header = () => {
   return (
@@ -7,7 +6,8 @@ const Header = () => {
         <span class="logo-g">◈</span>
         <span class="logo-t">CertFolio</span>
       </a>
-      <button class="btn-add" onClick={addCert}>
+      <a href="/certs/add">
+      <button type="button" class="btn-add">
         <svg
           width="13"
           height="13"
@@ -20,6 +20,7 @@ const Header = () => {
         </svg>
         Añadir certificado
       </button>
+      </a>
     </div>
   );
 };

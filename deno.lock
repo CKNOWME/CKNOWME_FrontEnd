@@ -33,6 +33,7 @@
     "npm:@preact/signals@^2.2.1": "2.6.1_preact@10.28.2",
     "npm:@preact/signals@^2.5.0": "2.6.1_preact@10.28.2",
     "npm:@prefresh/vite@^2.4.8": "2.4.11_preact@10.28.2_vite@7.3.1__picomatch@4.0.3",
+    "npm:dotenv@^17.3.1": "17.3.1",
     "npm:esbuild-wasm@~0.25.11": "0.25.12",
     "npm:esbuild@0.25.7": "0.25.7",
     "npm:esbuild@~0.25.5": "0.25.12",
@@ -961,6 +962,9 @@
         "ms"
       ]
     },
+    "dotenv@17.3.1": {
+      "integrity": "sha512-IO8C/dzEb6O3F9/twg6ZLXz164a2fhTnEWb95H23Dm4OuN+92NmEAlTrupP9VW6Jm3sO26tQlqyvyi4CsnY9GA=="
+    },
     "electron-to-chromium@1.5.277": {
       "integrity": "sha512-wKXFZw4erWmmOz5N/grBoJ2XrNJGDFMu2+W5ACHza5rHtvsqrK4gb6rnLC7XxKB9WlJ+RmyQatuEXmtm86xbnw=="
     },
@@ -1225,6 +1229,7 @@
       "jsr:@fresh/core@^2.2.0",
       "jsr:@fresh/plugin-vite@^1.0.8",
       "npm:@preact/signals@^2.5.0",
+      "npm:dotenv@^17.3.1",
       "npm:preact@^10.27.2",
       "npm:vite@^7.1.3"
     ]
