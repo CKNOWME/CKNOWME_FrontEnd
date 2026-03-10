@@ -108,6 +108,11 @@ const AddCert = () => {
         <MessageIsland message={msg.message} />
       )}
 
+
+      <div class="form-acts" style={{ marginBottom: "1rem" }}>
+        <a class="btn-secondary" href="/certs/import">Importar certificados</a>
+      </div>
+
       <form onSubmit={handleAdd} class="form" style={{ maxWidth: "820px" }}>
         <div class="form-row">
           <div class="fg">

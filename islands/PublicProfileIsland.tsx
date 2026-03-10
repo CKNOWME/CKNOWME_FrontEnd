@@ -7,6 +7,7 @@ const PublicProfileIsland = () => {
   const [user, setUser] = useState<PublicUser | null>(null);
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
+  const [downloading, setDownloading] = useState<boolean>(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -54,6 +55,25 @@ const PublicProfileIsland = () => {
   const profileUrl = globalThis.location.href;
   const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=6&data=${encodeURIComponent(profileUrl)}&color=8bff2b&bgcolor=0a0c10`;
   const qrDownloadUrl = `${qrUrl}&format=png`;
+
+
+  const onDownloadQr = async () => {
+    try {
+      setDownloading(true);
+      const res = await fetch(qrDownloadUrl, { cache: "no-store" });
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `qr-${user.username}.png`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    } finally {
+      setDownloading(false);
+    }
+  };
 
   return (
     <>
@@ -110,7 +130,7 @@ const PublicProfileIsland = () => {
                 <a class="btn-secondary" href={user.links.website} target="_blank" rel="noreferrer">Website</a>
               )}
               {user.cv && (
-                <a class="btn-primary" href={user.cv} download={`cv-${user.username}.pdf`}>Descargar CV</a>
+                <a class="btn-secondary" href={user.cv} download={`cv-${user.username}.pdf`}>Descargar CV</a>
               )}
             </div>
           </div>
@@ -124,7 +144,7 @@ const PublicProfileIsland = () => {
               <img src={qrUrl} alt="QR" />
             </div>
             <div class="qr-actions">
-              <a class="btn-primary" href={qrDownloadUrl} download={`qr-${user.username}.png`}>Descargar QR</a>
+              <button class="btn-primary" type="button" onClick={onDownloadQr} disabled={downloading}>{downloading ? "Descargando..." : "Descargar QR"}</button>
             </div>
             <div class="qr-url">{profileUrl}</div>
           </div>

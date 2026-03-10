@@ -41,6 +41,7 @@ const ProfileCerts = () => {
   const [to, setTo] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [editing, setEditing] = useState<Certificate | null>(null);
+  const [tagEditInput, setTagEditInput] = useState<string>("");
   const [saving, setSaving] = useState(false);
 
   const load = async () => {
@@ -250,8 +251,8 @@ const ProfileCerts = () => {
                 <div class="fg">
                   <label>Tags (coma)</label>
                   <input
-                    value={(editing.tags || []).join(", ")}
-                    onInput={(e) => setEditing({ ...editing, tags: (e.target as HTMLInputElement).value.split(",").map((t) => t.trim()).filter(Boolean) })}
+                    value={tagEditInput}
+                    onInput={(e) => setTagEditInput((e.target as HTMLInputElement).value)}
                   />
                 </div>
               </div>

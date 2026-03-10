@@ -245,11 +245,13 @@ const Profile = () => {
             {user.email}
           </div>
           <div style={{ display: "flex", gap: ".5rem", flexWrap: "wrap" }}>
-            <button class="btn-secondary" type="button" onClick={() => cvRef.current?.click()} disabled={cvUploading}>
-              Subir CV (PDF)
-            </button>
+            {!cv && (
+              <button class="btn-secondary" type="button" onClick={() => cvRef.current?.click()} disabled={cvUploading}>
+                Subir CV (PDF)
+              </button>
+            )}
             {cv && (
-              <a class="btn-primary" href={cv} download={`cv-${user.username}.pdf`}>Descargar CV</a>
+              <a class="btn-secondary" href={cv} download={`cv-${user.username}.pdf`}>Descargar CV</a>
             )}
             {cv && (
               <button class="btn-secondary" type="button" onClick={onDeleteCv} disabled={cvUploading}>

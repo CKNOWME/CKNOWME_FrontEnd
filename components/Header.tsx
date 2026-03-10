@@ -9,8 +9,6 @@ const Header = () => {
           <span class="logo-t">CertFolio</span>
         </a>
         <div style={{ display: "flex", gap: ".6rem", alignItems: "center" }}>
-          <a href="/profile" class="btn-secondary">Mi perfil</a>
-          <a href="/certs/import" class="btn-secondary">Importar</a>
           <a href="/certs/add">
             <button type="button" class="btn-add">
               <svg
@@ -27,6 +25,9 @@ const Header = () => {
             </button>
           </a>
           <a href="/" class="btn-secondary">Explorar</a>
+          <a href="/dashboard" class="btn-secondary">Panel</a>
+          <a href="/profile" class="btn-secondary">Mi perfil</a>
+          <a href="/certs/import" class="btn-secondary">Importar</a>
           <LogoutIsland />
         </div>
       </div>
