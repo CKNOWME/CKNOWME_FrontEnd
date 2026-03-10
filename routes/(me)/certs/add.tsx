@@ -1,1 +1,7 @@
-import AddCert from "../../../components/AddCert.tsx";
+import AddCertIsland from "../../../islands/AddCertIsland.tsx";
+
+const AddCertPage = () => {
+  return <AddCertIsland />;
+};
+
+export default AddCertPage;

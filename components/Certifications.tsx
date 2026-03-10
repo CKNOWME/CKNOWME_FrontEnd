@@ -4,22 +4,28 @@ import CertCard from "./CertCard.tsx";
 
 const getCerts = async (): Promise<Certificate[]> => {
   const res = await fetch("/api/certificate");
-  return res.json();
+  const data = await res.json();
+  if (!res.ok) return [];
+  return (data as { certs?: Certificate[] }).certs ?? [];
 };
 
 const THIS_YEAR = new Date().getFullYear();
 
-export default function Certifications() {
-  const [certs, setCerts]   = useState<Certificate[]>([]);
+type Props = {
+  compact?: boolean;
+};
+
+export default function Certifications({ compact = false }: Props) {
+  const [certs, setCerts] = useState<Certificate[]>([]);
   const [filter, setFilter] = useState<string>("all");
   const [search, setSearch] = useState<string>("");
   const [certTypes, setCertTypes] = useState<string[]>([]);
-  
+
   useEffect(() => {
     const loadCerts = async () => {
-      const certs = await getCerts();
-      setCerts(certs);
-      const types = new Set(certs.map((c) => c.category));
+      const loaded = await getCerts();
+      setCerts(loaded);
+      const types = new Set(loaded.map((c) => c.category || "General"));
       setCertTypes(Array.from(types));
     };
     loadCerts();
@@ -28,7 +34,8 @@ export default function Certifications() {
   const countByType = useMemo(() => {
     const map: Record<string, number> = { all: certs.length };
     for (const cert of certs) {
-      map[cert.category] = (map[cert.category] ?? 0) + 1;
+      const cat = cert.category || "General";
+      map[cat] = (map[cat] ?? 0) + 1;
     }
     return map;
   }, [certs]);
@@ -39,14 +46,15 @@ export default function Certifications() {
   );
 
   const activeCatCount = useMemo(
-    () => new Set(certs.map((c) => c.category)).size,
+    () => new Set(certs.map((c) => c.category || "General")).size,
     [certs],
   );
 
   const visible = useMemo(() => {
     const q = search.trim().toLowerCase();
     return certs.filter((c) => {
-      const catOk  = filter === "all" || c.category === filter;
+      const cat = c.category || "General";
+      const catOk = filter === "all" || cat === filter;
       const termOk = !q ||
         c.title.toLowerCase().includes(q) ||
         c.issuer.toLowerCase().includes(q) ||
@@ -56,18 +64,22 @@ export default function Certifications() {
   }, [certs, filter, search]);
 
   return (
-    <>
-      <div class="hero-badge">
-        <span class="dot" /> Portfolio activo
-      </div>
-      <h1 class="hero-title">
-        Mis <em>Certificaciones</em><br />Profesionales
-      </h1>
-      <p class="hero-sub">
-        Colección verificable de logros, cursos y acreditaciones
-      </p>
+    <section class={compact ? "section-compact" : ""}>
+      {!compact && (
+        <>
+          <div class="hero-badge">
+            <span class="dot" /> Portfolio activo
+          </div>
+          <h1 class="hero-title">
+            Mis <em>Certificaciones</em><br />Profesionales
+          </h1>
+          <p class="hero-sub">
+            Coleccion verificable de logros, cursos y acreditaciones
+          </p>
+        </>
+      )}
 
-      <div class="stats">
+      <div class={compact ? "stats stats-compact" : "stats"}>
         <div class="stat">
           <span class="stat-n">{certs.length}</span>
           <span class="stat-l">Total</span>
@@ -75,16 +87,16 @@ export default function Certifications() {
         <span class="stat-div" />
         <div class="stat">
           <span class="stat-n">{thisYearCount}</span>
-          <span class="stat-l">Este año</span>
+          <span class="stat-l">Este ano</span>
         </div>
         <span class="stat-div" />
         <div class="stat">
           <span class="stat-n">{activeCatCount}</span>
-          <span class="stat-l">Categorías</span>
+          <span class="stat-l">Categorias</span>
         </div>
       </div>
 
-      <div class="toolbar">
+      <div class={compact ? "toolbar toolbar-compact" : "toolbar"}>
         <div class="filters">
           <button
             type="button"
@@ -122,18 +134,18 @@ export default function Certifications() {
         </label>
       </div>
 
-      <div class="cards" id="cards">
+      <div class={compact ? "cards cards-compact" : "cards"} id="cards">
         {visible.length === 0
           ? (
             <div class="empty">
               <span class="empty-g">◈</span>
               <p>
                 {search || filter !== "all"
-                  ? "Ningún certificado coincide"
-                  : "Aún no hay certificados"}
+                  ? "Ningun certificado coincide"
+                  : "Aun no hay certificados"}
               </p>
-              {!search && filter === "all" && (
-                <span>Haz clic en "+ Añadir certificado" para empezar</span>
+              {!search && filter === "all" && !compact && (
+                <span>Haz clic en "+ Anadir certificado" para empezar</span>
               )}
             </div>
           )
@@ -144,6 +156,6 @@ export default function Certifications() {
             />
           ))}
       </div>
-    </>
+    </section>
   );
 }

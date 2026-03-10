@@ -1,10 +1,12 @@
 import ProfileIsland from "../../islands/ProfileIsland.tsx";
+import ProfileCertsisland from "../../islands/ProfileCertsIsland.tsx";
 
 const ProfilePage = () => {
-    return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100">
-            <ProfileIsland />
-        </div>
-    );
-}  
+  return (
+    <>
+      <ProfileIsland />
+      <ProfileCertsisland />
+    </>
+  );
+};
 export default ProfilePage;

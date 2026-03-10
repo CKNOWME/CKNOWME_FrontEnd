@@ -1,10 +1,7 @@
-
+import PublicProfileIsland from "../../islands/PublicProfileIsland.tsx";
 
 const User = () => {
-  return (
-    <div>
-    </div>
-  );
+  return <PublicProfileIsland />;
 };
 
 export default User;

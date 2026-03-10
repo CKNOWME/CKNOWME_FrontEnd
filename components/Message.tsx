@@ -9,7 +9,7 @@ const Message = ({message}:AlertProps) => {
         <div
                 className="alertbox"
                 style={{
-                  marginBottom: "20px",
+                  marginBlock: "20px",
                   borderRadius: "8px",
                   padding: "12px 20px",
                   position: "relative",

@@ -1,4 +1,3 @@
-
 export type Certificate = {
   id: string;
   title: string;
@@ -7,19 +6,43 @@ export type Certificate = {
   date: number;
   pdfUrl: string;
   verifyUrl: string;
-  photo:string;
+  photo: string;
+  cv?: string;
   category: string;
+  isPublic?: boolean;
+  tags?: string[];
+  hash?: string;
+  expiresAt?: number;
+};
+
+export type UserLinks = {
+  github?: string;
+  portfolio?: string;
+  linkedin?: string;
+  website?: string;
 };
 
 export type User = {
-  id: string;
   username: string;
   name: string;
   email: string;
-  password: string;
-  photo:string;
+  photo: string;
+  cv?: string;
+  age?: number;
+  studies?: string;
+  links?: UserLinks;
   certs: string[];
-  intentos: number;
+};
+
+export type PublicUser = {
+  username: string;
+  name: string;
+  photo: string;
+  cv?: string;
+  age?: number;
+  studies?: string;
+  links?: UserLinks;
+  certs: Certificate[];
 };
 
 export type Message = {

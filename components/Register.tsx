@@ -8,6 +8,7 @@ import {
 } from "../utils.ts";
 import LoginMessageIsland from "../islands/MessageIsland.tsx";
 import { Message } from "../types.ts";
+import { getCsrfToken } from "../utils.ts";
 
 const Register = () => {
   const [username, setUsername] = useState<string>("");
@@ -37,7 +38,7 @@ const Register = () => {
     e.preventDefault();
 
     if (!isPasswordValid(password)) {
-      showMessage("❌ Contraseña no valida");
+      showMessage("❌ Contrasena no valida");
       return;
     }
     if (!isEmailValid(email)) {
@@ -45,152 +46,91 @@ const Register = () => {
       return;
     }
     const bodyData = { username, email, password, name };
+    const csrf = getCsrfToken();
     const res = await fetch("/api/register", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "x-csrf-token": csrf },
       body: JSON.stringify(bodyData),
     });
     if (res.ok) {
       showMessage("✅ Registro correcto");
       globalThis.location.href = "/profile";
     } else {
-      showMessage(
-        "❌ Registro incorrecto,asegurate que el usuario no este registrado",
-      );
+      showMessage("❌ Registro incorrecto. Revisa tus datos.");
     }
   }
   const isFormValid = username && isEmailValid(email) && name &&
     isPasswordValid(password);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <h1 className="text-4xl font-bold mb-4">Register</h1>
-      {msg.visible && alertaRegistro.value && (
-        <LoginMessageIsland
-          message={msg.message}
-        />
-      )}
-      <form onSubmit={handleSubmit} className="w-full max-w-sm">
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="username"
-          >
-            Username
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="username"
-            onInput={(e) => setUsername((e.target as HTMLInputElement).value)}
-            type="text"
-            placeholder="Username"
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="email"
-          >
-            Email
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="email"
-            type="email"
-            placeholder="Email"
-            onInput={(e) =>
-              handleEmailChange((e.target as HTMLInputElement).value)}
-          />
-          {emailError && (
-            <p className="text-red-500 text-xs italic mt-2">{emailError}</p>
-          )}
-        </div>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="name"
-          >
-            Name
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="name"
-            type="text"
-            placeholder="Name"
-            onInput={(e) => setName((e.target as HTMLInputElement).value)}
-          />
-        </div>
-        <div className="mb-6">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="password"
-          >
-            Password
-          </label>
-          <input
-            onInput={(e) =>
-              handlePasswordChange((e.target as HTMLInputElement).value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-            id="password"
-            type="password"
-            placeholder="******************"
-          />
-        </div>
-        {passwordError && (
-          <div
-            style={{
-              marginLeft: "40px",
-              marginRight: "40px",
-              padding: "10px 12px",
-              borderRadius: "8px",
-              fontSize: "13px",
-              marginTop: "8px",
-              background: "rgba(239, 68, 68, 0.1)",
-              border: "1px solid rgba(239, 68, 68, 0.3)",
-              color: "#ef4444",
-            }}
-          >
-            {passwordError}
-          </div>
+    <section class="auth-wrap">
+      <div class="auth">
+        <h1>Crear cuenta</h1>
+        <p class="auth-sub">Sube y comparte tus certificaciones.</p>
+        {msg.visible && alertaRegistro.value && (
+          <LoginMessageIsland message={msg.message} />
         )}
-        {emailError.includes("❌") && (
-          <div
-            style={{
-              marginLeft: "40px",
-              marginRight: "40px",
-              padding: "10px 12px",
-              borderRadius: "8px",
-              fontSize: "13px",
-              marginTop: "8px",
-              background: "rgba(239, 68, 68, 0.1)",
-              border: "1px solid rgba(239, 68, 68, 0.3)",
-              color: "#ef4444",
-            }}
-          >
-            {emailError}
+        <form onSubmit={handleSubmit} class="auth-form">
+          <div class="auth-field">
+            <label htmlFor="username">Username</label>
+            <input
+              id="username"
+              onInput={(e) => setUsername((e.target as HTMLInputElement).value)}
+              type="text"
+              placeholder="tu-username"
+            />
           </div>
-        )}
-        <div className="flex items-center justify-between">
-          <button
-            disabled={!isFormValid}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-            style={{
-              opacity: isFormValid ? 1 : 0.5,
-              cursor: isFormValid ? "pointer" : "not-allowed",
-            }}
-          >
-            Register
-          </button>
-        </div>
-        <p className="text-gray-600 text-sm mt-4">
-          Already have an account?{" "}
-          <a href="/login" className="text-blue-500 hover:text-blue-800">
-            Sign in
-          </a>
+          <div class="auth-field">
+            <label htmlFor="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              placeholder="tu@email.com"
+              onInput={(e) =>
+                handleEmailChange((e.target as HTMLInputElement).value)}
+            />
+            {emailError && (
+              <p class="auth-error">{emailError}</p>
+            )}
+          </div>
+          <div class="auth-field">
+            <label htmlFor="name">Name</label>
+            <input
+              id="name"
+              type="text"
+              placeholder="Tu nombre"
+              onInput={(e) => setName((e.target as HTMLInputElement).value)}
+            />
+          </div>
+          <div class="auth-field">
+            <label htmlFor="password">Password</label>
+            <input
+              onInput={(e) =>
+                handlePasswordChange((e.target as HTMLInputElement).value)}
+              id="password"
+              type="password"
+              placeholder="********"
+            />
+            {passwordError && (
+              <p class="auth-error">{passwordError}</p>
+            )}
+          </div>
+          <div class="auth-actions">
+            <button
+              disabled={!isFormValid}
+              class="btn-save"
+              type="submit"
+              style={{ opacity: isFormValid ? 1 : 0.5 }}
+            >
+              Crear cuenta
+            </button>
+          </div>
+        </form>
+        <p class="auth-link">
+          Ya tienes cuenta? <a href="/login">Iniciar sesion</a>
         </p>
-      </form>
-    </div>
+      </div>
+    </section>
   );
 };
 

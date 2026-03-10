@@ -1,12 +1,17 @@
-
 const HeaderNL = () => {
   return (
-    <div class="header-in">
-      <a class="logo" href="#">
-        <span class="logo-g">◈</span>
-        <span class="logo-t">CertFolio</span>
-      </a>
-    </div>
+    <header class="header">
+      <div class="header-in">
+        <a class="logo" href="/">
+          <span class="logo-g">◈</span>
+          <span class="logo-t">CKnowMe</span>
+        </a>
+        <div style={{ display: "flex", gap: ".6rem" }}>
+          <a href="/login" class="btn-secondary">Login</a>
+          <a href="/register" class="btn-add">Crear cuenta</a>
+        </div>
+      </div>
+    </header>
   );
 };
 
