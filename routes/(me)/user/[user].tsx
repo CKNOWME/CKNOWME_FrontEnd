@@ -1,7 +1,7 @@
-import PublicMemberIsland from "../../../islands/PublicProfileIsland.tsx";
+import PublicMemberIsland from "../../../islands/PublicMemberIsland.tsx";
 
-const User = () => {
+const Member = () => {
   return <PublicMemberIsland />;
 };
 
-export default User;
+export default Member;

@@ -3,7 +3,7 @@ import { Certificate, PublicUser } from "../types.ts";
 import CertCard from "../components/CertCard.tsx";
 import Loading from "../components/Loading.tsx";
 
-const PublicProfileIsland = () => {
+const PublicMember = () => {
   const [user, setUser] = useState<PublicUser | null>(null);
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
@@ -11,11 +11,8 @@ const PublicProfileIsland = () => {
 
   useEffect(() => {
     let cancelled = false;
-    console.log(globalThis.location.pathname)
-    const username = decodeURIComponent(
-      globalThis.location.pathname.split("/").pop() ?? "",
-    );
-    console.log(username)
+    const parts = globalThis.location.pathname.split("/");
+    const username = decodeURIComponent(parts[2] ?? "");
     const load = async () => {
       try {
         if (username === "") {
@@ -237,4 +234,4 @@ const PublicProfileIsland = () => {
   );
 };
 
-export default PublicProfileIsland;
+export default PublicMember;

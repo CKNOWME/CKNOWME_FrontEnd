@@ -1,5 +1,7 @@
 import ImportCertsIsland from "../../../islands/ImportCertsIsland.tsx";
 
-const ImportPage = () => <ImportCertsIsland />;
+const ImportPage = () => {
+return <ImportCertsIsland />;
+}
 
 export default ImportPage;

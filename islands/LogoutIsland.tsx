@@ -1,20 +1,6 @@
-import { getCsrfToken } from "../utils.ts";
+import Logout from "../components/LogOut.tsx";
 
-const LogoutIsland = () => {
-  const onLogout = async () => {
-    const csrf = getCsrfToken();
-    await fetch("/api/logout", {
-      method: "POST",
-      headers: { "x-csrf-token": csrf },
-    });
-    globalThis.location.replace("/");
-  };
-
-  return (
-    <button type="button" class="btn-secondary" onClick={onLogout}>
-      Logout
-    </button>
-  );
-};
-
-export default LogoutIsland;
+const LogOutIsland = () => {
+  return <Logout />
+}
+export default LogOutIsland

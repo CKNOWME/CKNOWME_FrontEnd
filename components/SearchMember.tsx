@@ -11,6 +11,7 @@ const SearchMember = () => {
   };
 
   return (
+    <div style={{ marginTop: "2rem" }}>
     <section class="hero">
       <h1 class="hero-title">
         Search for a member !
@@ -32,6 +33,7 @@ const SearchMember = () => {
       </button>
     </form>
     </section>
+    </div>
   );
 };
 

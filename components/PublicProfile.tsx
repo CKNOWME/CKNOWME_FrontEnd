@@ -3,7 +3,7 @@ import { Certificate, PublicUser } from "../types.ts";
 import CertCard from "../components/CertCard.tsx";
 import Loading from "../components/Loading.tsx";
 
-const PublicProfileIsland = () => {
+const PublicProfile = () => {
   const [user, setUser] = useState<PublicUser | null>(null);
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
@@ -169,4 +169,4 @@ const PublicProfileIsland = () => {
   );
 };
 
-export default PublicProfileIsland;
+export default PublicProfile;

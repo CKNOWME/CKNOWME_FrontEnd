@@ -656,7 +656,7 @@ const alreadylogged = define.middleware(async (ctx: Context<State>) => {
     if (!apiResponse.ok) return await ctx.next();
     return new Response(null, {
       status: 302,
-      headers: { Location: "/profile" },
+      headers: { Location: "/dashboard" },
     });
   } catch (_err: Error | unknown) {
     return await ctx.next();
