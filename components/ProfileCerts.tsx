@@ -189,7 +189,7 @@ const ProfileCerts = () => {
           value={to}
           onInput={(e) => setTo((e.target as HTMLInputElement).value)}
         />
-        <a class="btn-secondary" href="/certs/add">Anadir</a>
+        <a class="btn-secondary" href="/certs/add">Añadir</a>
         <a class="btn-secondary" href="/certs/import">Importar</a>
       </div>
 

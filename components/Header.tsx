@@ -21,7 +21,7 @@ const Header = () => {
               >
                 <path d="M12 5v14M5 12h14" />
               </svg>
-              Anadir certificado
+              Añadir certificado
             </button>
           </a>
           <a href="/user" class="btn-secondary">Buscar Usuario</a>

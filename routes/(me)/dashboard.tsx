@@ -46,7 +46,7 @@ const Dashboard = () => {
         </p>
         <div style={{ display: "flex", gap: ".6rem", flexWrap: "wrap", marginTop: "1rem" }}>
           <a class="btn-secondary" href="/profile">Editar perfil</a>
-          <a class="btn-secondary" href="/certs/add">Anadir certificado</a>
+          <a class="btn-secondary" href="/certs/add">Añadir certificado</a>
           <a class="btn-secondary" href="/certs/import">Importar</a>
         </div>
       </section>
@@ -64,7 +64,7 @@ const Dashboard = () => {
                 <div class="card-foot">
                   <span class="card-date">Actualiza tu portfolio</span>
                   <div class="card-acts">
-                    <a class="ca-btn" href="/certs/add">Anadir</a>
+                    <a class="ca-btn" href="/certs/add">Añadir</a>
                   </div>
                 </div>
               </div>

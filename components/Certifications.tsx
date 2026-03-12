@@ -145,7 +145,7 @@ export default function Certifications({ compact = false }: Props) {
                   : "Aun no hay certificados"}
               </p>
               {!search && filter === "all" && !compact && (
-                <span>Haz clic en "+ Anadir certificado" para empezar</span>
+                <span>Haz clic en "+ Añadir certificado" para empezar</span>
               )}
             </div>
           )

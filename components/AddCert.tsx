@@ -88,7 +88,7 @@ const AddCert = () => {
       setTagsInput("");
       setExpiryInput("");
     } else {
-      showMessage(data?.error ? `❌ ${data.error}` : "❌ No se pudo anadir");
+      showMessage(data?.error ? `❌ ${data.error}` : "❌ No se pudo añadir");
     }
   }
 

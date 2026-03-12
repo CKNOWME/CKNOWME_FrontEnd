@@ -2,6 +2,9 @@ import SearchMemberIsland from "../../../islands/SearchMemberIsland.tsx"
 
 
 const SearchPage = () => {
-    return <SearchMemberIsland />
+    return (
+    <div style={{ marginTop: "2rem" }}>
+        <SearchMemberIsland />
+      </div>)
 }
 export default SearchPage
