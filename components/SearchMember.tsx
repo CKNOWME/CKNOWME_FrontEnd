@@ -7,10 +7,14 @@ const SearchMember = () => {
     e.preventDefault();
     const trimmed = query.trim();
     if (!trimmed) return;
-    globalThis.location.href = `user/${encodeURIComponent(trimmed)}`;
+    globalThis.location.href = `/user/${encodeURIComponent(trimmed)}`;
   };
 
   return (
+    <section class="hero">
+      <h1 class="hero-title">
+        Search for a member !
+      </h1>
     <form class="search" style={{ maxWidth: "420px" }} onSubmit={onSubmit}>
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
         stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -27,6 +31,7 @@ const SearchMember = () => {
         Buscar
       </button>
     </form>
+    </section>
   );
 };
 

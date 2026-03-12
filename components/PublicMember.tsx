@@ -11,10 +11,16 @@ const PublicProfileIsland = () => {
 
   useEffect(() => {
     let cancelled = false;
-    const username = decodeURIComponent(globalThis.location.pathname.slice(2));
-
+    console.log(globalThis.location.pathname)
+    const username = decodeURIComponent(
+      globalThis.location.pathname.split("/").pop() ?? "",
+    );
+    console.log(username)
     const load = async () => {
       try {
+        if (username === "") {
+          setError("No se pudo cargar el perfil");
+        }
         const res = await fetch(`/api/user/${username}`);
         const data = await res.json();
         if (!res.ok) {
@@ -53,9 +59,11 @@ const PublicProfileIsland = () => {
 
   const certs: Certificate[] = user.certs ?? [];
   const profileUrl = globalThis.location.href;
-  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=6&data=${encodeURIComponent(profileUrl)}&color=8bff2b&bgcolor=0a0c10`;
+  const qrUrl =
+    `https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=6&data=${
+      encodeURIComponent(profileUrl)
+    }&color=8bff2b&bgcolor=0a0c10`;
   const qrDownloadUrl = `${qrUrl}&format=png`;
-
 
   const onDownloadQr = async () => {
     try {
@@ -85,31 +93,52 @@ const PublicProfileIsland = () => {
           {user.name} <em>@{user.username}</em>
         </h1>
         <p class="hero-sub">{certs.length} certificaciones publicadas</p>
-        <div style={{ display: "flex", gap: "1.5rem", alignItems: "center", flexWrap: "wrap" }}>
-          {user.photo ? (
-            <img
-              src={user.photo}
-              alt={user.name}
-              style={{ width: "120px", height: "120px", borderRadius: "999px", objectFit: "cover" }}
-            />
-          ) : (
-            <div
-              style={{
-                width: "120px",
-                height: "120px",
-                borderRadius: "999px",
-                background: "rgba(255,255,255,.08)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: "1.6rem",
-                color: "rgba(255,255,255,.45)",
-              }}
-            >
-              ◈
-            </div>
-          )}
-          <div style={{ display: "flex", flexDirection: "column", gap: ".45rem", minWidth: "220px" }}>
+        <div
+          style={{
+            display: "flex",
+            gap: "1.5rem",
+            alignItems: "center",
+            flexWrap: "wrap",
+          }}
+        >
+          {user.photo
+            ? (
+              <img
+                src={user.photo}
+                alt={user.name}
+                style={{
+                  width: "120px",
+                  height: "120px",
+                  borderRadius: "999px",
+                  objectFit: "cover",
+                }}
+              />
+            )
+            : (
+              <div
+                style={{
+                  width: "120px",
+                  height: "120px",
+                  borderRadius: "999px",
+                  background: "rgba(255,255,255,.08)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: "1.6rem",
+                  color: "rgba(255,255,255,.45)",
+                }}
+              >
+                ◈
+              </div>
+            )}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: ".45rem",
+              minWidth: "220px",
+            }}
+          >
             {typeof user.age === "number" && (
               <div class="hero-sub">Edad: {user.age}</div>
             )}
@@ -118,19 +147,53 @@ const PublicProfileIsland = () => {
             )}
             <div style={{ display: "flex", gap: ".6rem", flexWrap: "wrap" }}>
               {user.links?.github && (
-                <a class="btn-secondary" href={user.links.github} target="_blank" rel="noreferrer">GitHub</a>
+                <a
+                  class="btn-secondary"
+                  href={user.links.github}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  GitHub
+                </a>
               )}
               {user.links?.portfolio && (
-                <a class="btn-secondary" href={user.links.portfolio} target="_blank" rel="noreferrer">Portfolio</a>
+                <a
+                  class="btn-secondary"
+                  href={user.links.portfolio}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Portfolio
+                </a>
               )}
               {user.links?.linkedin && (
-                <a class="btn-secondary" href={user.links.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+                <a
+                  class="btn-secondary"
+                  href={user.links.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  LinkedIn
+                </a>
               )}
               {user.links?.website && (
-                <a class="btn-secondary" href={user.links.website} target="_blank" rel="noreferrer">Website</a>
+                <a
+                  class="btn-secondary"
+                  href={user.links.website}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Website
+                </a>
               )}
               {user.cv && (
-                <a class="btn-secondary" href={user.cv} download={`cv-${user.username}.pdf`}>Descargar CV</a>
+                <a
+                  class="btn-secondary"
+                  href={user.cv}
+                  download={`cv-${user.username}.pdf`}
+                >
+                  Descargar CV
+                </a>
               )}
             </div>
           </div>
@@ -144,7 +207,14 @@ const PublicProfileIsland = () => {
               <img src={qrUrl} alt="QR" />
             </div>
             <div class="qr-actions">
-              <button class="btn-primary" type="button" onClick={onDownloadQr} disabled={downloading}>{downloading ? "Descargando..." : "Descargar QR"}</button>
+              <button
+                class="btn-primary"
+                type="button"
+                onClick={onDownloadQr}
+                disabled={downloading}
+              >
+                {downloading ? "Descargando..." : "Descargar QR"}
+              </button>
             </div>
             <div class="qr-url">{profileUrl}</div>
           </div>
@@ -160,9 +230,7 @@ const PublicProfileIsland = () => {
                 <p>Este usuario aun no ha publicado certificados</p>
               </div>
             )
-            : certs.map((cert) => (
-              <CertCard key={cert.id} {...cert} />
-            ))}
+            : certs.map((cert) => <CertCard key={cert.id} {...cert} />)}
         </div>
       </section>
     </>
