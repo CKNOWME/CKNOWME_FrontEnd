@@ -252,6 +252,30 @@ app.delete("/api/user/photo", async (ctx: Context<State>) => {
 
 
 
+app.post("/api/oauth/linkedin/import-html", async (ctx: Context<State>) => {
+  const missing = requireCsrf(ctx);
+  if (missing) return missing;
+  try {
+    const contentType = ctx.req.headers.get("content-type") || "";
+    const body = new Uint8Array(await ctx.req.arrayBuffer());
+    const apiResponse = await fetch(backendUrl + "/oauth/linkedin/import-html", {
+      method: "POST",
+      headers: proxyHeaders(ctx, { "Content-Type": contentType }),
+      body,
+    });
+    const result = await apiResponse.json();
+    return new Response(
+      JSON.stringify(result),
+      { status: apiResponse.status, headers: { "Content-Type": "application/json" } },
+    );
+  } catch (_error) {
+    return new Response(
+      JSON.stringify({ error: "Error interno" }),
+      { status: 500, headers: { "Content-Type": "application/json" } },
+    );
+  }
+});
+
 app.post("/api/oauth/credly/import", async (ctx: Context<State>) => {
   const missing = requireCsrf(ctx);
   if (missing) return missing;
@@ -601,6 +625,9 @@ const checkAuth = define.middleware(async (ctx: Context<State>) => {
       headers: { cookie, "x-csrf-token": csrf },
     });
     if (!apiResponse.ok) {
+      if (apiResponse.status === 403 || apiResponse.status === 429) {
+        return await ctx.next();
+      }
       return new Response(null, {
         status: 302,
         headers: { Location: "/login", "Set-Cookie": clearCookie },

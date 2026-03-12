@@ -24,8 +24,8 @@ const Header = () => {
               Anadir certificado
             </button>
           </a>
-          <a href="/" class="btn-secondary">Explorar</a>
-          <a href="/dashboard" class="btn-secondary">Panel</a>
+          <a href="/" class="btn-secondary">Buscar Usuario</a>
+          <a href="/dashboard" class="btn-secondary">Explorar</a>
           <a href="/profile" class="btn-secondary">Mi perfil</a>
           <a href="/certs/import" class="btn-secondary">Importar</a>
           <LogoutIsland />

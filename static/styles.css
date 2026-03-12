@@ -788,3 +788,21 @@ body {
   margin-top: .6rem;
   word-break: break-all;
 }
+
+
+/* ── Import brands ── */
+.brand-pill {
+  display: inline-flex; align-items: center; gap: .4rem;
+  padding: .2rem .55rem; border-radius: 999px;
+  border: 1px solid var(--b1);
+  font-family: var(--fm); font-size: .6rem; letter-spacing: .08em; text-transform: uppercase;
+}
+.brand-dot {
+  width: 18px; height: 18px; border-radius: 999px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--fm); font-size: .62rem; font-weight: 700;
+}
+.li-pill { border-color: rgba(10,102,194,.45); color: #6ea3ff; background: rgba(10,102,194,.12); }
+.li-dot { background: #0a66c2; color: #fff; }
+.credly-pill { border-color: rgba(255,106,0,.45); color: #ffb37a; background: rgba(255,106,0,.12); }
+.credly-dot { background: #ff6a00; color: #140a00; }
