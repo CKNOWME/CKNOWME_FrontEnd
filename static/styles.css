@@ -256,7 +256,6 @@ body {
 .card:hover { border-color: var(--b2); transform: translateY(-3px); box-shadow: 0 20px 60px rgba(0,0,0,.55); }
 .card:hover::before { opacity: 1; }
 
-/* Per-category accent */
 .card.Cloud      { --ca: var(--blue); }
 .card.Security   { --ca: var(--red); }
 .card.Development{ --ca: var(--lime); }
@@ -264,7 +263,7 @@ body {
 .card.Management { --ca: var(--gold); }
 .card.General    { --ca: var(--td); }
 
-/* Thumbnail */
+ Thumbnail */
 .thumb {
   aspect-ratio: 16/7; position: relative; overflow: hidden; flex-shrink: 0;
   cursor: pointer;
@@ -303,7 +302,7 @@ body {
   backdrop-filter: blur(10px);
 }
 
-/* Category tag */
+ Category tag */
 .cat-tag {
   position: absolute; top: .72rem; right: .72rem; z-index: 2;
   font-family: var(--fm); font-size: .59rem; letter-spacing: .08em; text-transform: uppercase;
@@ -316,7 +315,7 @@ body {
 .card.Management  .cat-tag { background: var(--gold-d);   color: var(--gold); }
 .card.General     .cat-tag { background: rgba(70,80,95,.2); color: var(--td); }
 
-/* Card body */
+
 .card-body { padding: 1.1rem; flex:1; display: flex; flex-direction: column; }
 .card-title { font-size: .95rem; font-weight: 700; line-height: 1.3; color: #fff; margin-bottom: .3rem; letter-spacing: -.01em; }
 .card-issuer {
@@ -377,7 +376,7 @@ body {
 }
 .m-close:hover { color: var(--tx); border-color: var(--b1); }
 
-/* Form */
+ Form */
 .form       { padding: 1.45rem 1.65rem; display: flex; flex-direction: column; gap: .9rem; }
 .form-row   { display: flex; gap: .85rem; }
 .form-row > * { flex: 1; min-width: 0; }
@@ -400,7 +399,7 @@ body {
 .fg select option { background: #131720; }
 .fg textarea { resize: vertical; min-height: 78px; }
 
-/* File zone */
+ File zone */
 .fzone {
   position: relative; border: 1px dashed var(--b1); border-radius: var(--rads);
   transition: border-color .18s, background .18s; overflow: hidden;
@@ -569,7 +568,7 @@ body {
   40% { transform: scale(1); opacity: 1; }
 }
 
-/* ── Compact certifications ── */
+ ── Compact certifications ── */
 .section-compact {
   max-width: 1380px;
   margin: 0 auto;
@@ -588,7 +587,7 @@ body {
   padding: 0 0 5rem;
 }
 
-/* ── Profile certs ── */
+ ── Profile certs ── */
 .mini-head {
   display: flex;
   align-items: center;
@@ -639,7 +638,7 @@ body {
   .mini-tools { flex-direction: column; align-items: stretch; }
 }
 
-/* ── Avatar menu ── */
+ ── Avatar menu ── */
 .avatar-btn {
   position: relative;
   width: 120px;
@@ -710,7 +709,7 @@ body {
   border-color: var(--b1);
 }
 
-/* ── QR card ── */
+ ── QR card ── */
 .qr-card {
   position: relative;
   margin-left: auto;
@@ -790,7 +789,7 @@ body {
 }
 
 
-/* ── Import brands ── */
+ ── Import brands ── */
 .brand-pill {
   display: inline-flex; align-items: center; gap: .4rem;
   padding: .2rem .55rem; border-radius: 999px;

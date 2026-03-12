@@ -78,12 +78,12 @@ const certByCategory = [
 ];
 
 const cvTemplates = [
-  { name: "Minimal ATS", focus: "Máxima compatibilidad con sistemas ATS. Sin tablas ni columnas. Puro texto estructurado.", tag: "Grandes empresas", icon: "📄" },
-  { name: "Tech Portfolio", focus: "Proyectos + stack tecnológico destacados. Ideal para roles de desarrollo y DevOps.", tag: "Developers", icon: "🖥️" },
-  { name: "Security Analyst", focus: "Certificaciones, labs (TryHackMe, HTB) y habilidades técnicas en primer plano.", tag: "Ciberseguridad", icon: "🔒" },
-  { name: "Executive", focus: "Experiencia, liderazgo y KPIs. Datos cuantificables y logros de negocio.", tag: "Gestión / Senior", icon: "👔" },
-  { name: "Cloud Engineer", focus: "Arquitecturas cloud, certs AWS/Azure/GCP y proyectos de infraestructura.", tag: "Cloud & DevOps", icon: "☁️" },
-  { name: "Data Scientist", focus: "Modelos, datasets, publicaciones y herramientas: Python, SQL, Spark, TensorFlow.", tag: "Datos & IA", icon: "📊" },
+  { name: "Minimal ATS", focus: "Máxima compatibilidad con sistemas ATS. Sin tablas ni columnas. Puro texto estructurado.", tag: "Grandes empresas", icon: "📄", url: "https://cvonline.me/assets/downloable-files/plantilla-curriculum-gratis-1.docx" },
+  { name: "Tech Portfolio", focus: "Proyectos + stack tecnológico destacados. Ideal para roles de desarrollo y DevOps.", tag: "Developers", icon: "🖥️", url: "https://cvonline.me/assets/downloable-files/plantilla-curriculum-gratis-2.docx"},
+  { name: "Security Analyst", focus: "Certificaciones, labs (TryHackMe, HTB) y habilidades técnicas en primer plano.", tag: "Ciberseguridad", icon: "🔒", url: "https://cvonline.me/assets/downloable-files/plantilla-curriculum-gratis-3.docx" },
+  { name: "Executive", focus: "Experiencia, liderazgo y KPIs. Datos cuantificables y logros de negocio.", tag: "Gestión / Senior", icon: "👔", url: "https://cvonline.me/assets/downloable-files/plantilla-curriculum-gratis-4.docx" },
+  { name: "Cloud Engineer", focus: "Arquitecturas cloud, certs AWS/Azure/GCP y proyectos de infraestructura.", tag: "Cloud & DevOps", icon: "☁️", url: "https://cvonline.me/assets/downloable-files/plantilla-curriculum-gratis-5.docx" },
+  { name: "Data Scientist", focus: "Modelos, datasets, publicaciones y herramientas: Python, SQL, Spark, TensorFlow.", tag: "Datos & IA", icon: "📊", url: "https://cvonline.me/assets/downloable-files/plantilla-curriculum-gratis-6.docx" },
 ];
 
 const companiesBySector = [
@@ -159,7 +159,7 @@ export default function Dashboard() {
     .map(c => ({
       ...c,
       items: c.items.filter(i =>
-        selectedLevels.some(l => i.level.includes(l)) &&
+        selectedLevels.some((l: string) => i.level.includes(l)) &&
         selectedDemands.includes(i.demand) &&
         (i.name.toLowerCase().includes(search.toLowerCase()) ||
           i.issuer.toLowerCase().includes(search.toLowerCase()))
@@ -172,7 +172,6 @@ export default function Dashboard() {
 
   return (
     <>
-      {/* Hero */}
       <section className="hero" style={{ paddingBottom: "1.5rem" }}>
         <div className="hero-badge">
           <span className="dot" /> Career Dashboard
@@ -185,7 +184,6 @@ export default function Dashboard() {
         </p>
       </section>
 
-      {/* Main tabs */}
       <div className="toolbar" style={{ paddingBottom: "1rem" }}>
         <div className="filters">
           {[
@@ -204,11 +202,9 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* ══ CERTS ══ */}
       {activeTab === "certs" && (
         <>
           <div className="toolbar" style={{ paddingTop: 0, flexDirection: "column", alignItems: "flex-start", gap: ".65rem" }}>
-            {/* Row 1: search + category toggles */}
             <div style={{ display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap", width: "100%" }}>
               <label className="search">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -222,7 +218,6 @@ export default function Dashboard() {
               </label>
               <div className="filters">
                 {allCategories.map(cat => {
-                  // FIX 1: usamos find con non-null assertion ya que cat siempre existe en certByCategory
                   const catData = certByCategory.find(c => c.category === cat)!;
                   return (
                     <button
@@ -237,7 +232,6 @@ export default function Dashboard() {
               </div>
             </div>
 
-            {/* Row 2: level + demand + reset + count */}
             <div style={{ display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap" }}>
               <span style={{ fontFamily: "var(--fm)", fontSize: ".62rem", letterSpacing: ".09em", textTransform: "uppercase", color: "#4791fe" }}>Nivel</span>
               <div className="filters">
@@ -291,31 +285,26 @@ export default function Dashboard() {
                       onClick={() => setExpandedCert(expandedCert === cert.name ? null : cert.name)}
                       style={{ cursor: "pointer" }}
                     >
-                      <div className="thumb">
-                        <div className="thumb-empty">
-                          <div className="thumb-empty-icon">{block.icon}</div>
-                          <div className="thumb-empty-hint">{cert.level} · Demanda {cert.demand}</div>
-                        </div>
-                        <span className="cat-tag">{cert.demand}</span>
-                        <div className="thumb-ov">
-                          <span className="view-chip">{expandedCert === cert.name ? "Cerrar" : "Ver detalles"}</span>
-                        </div>
-                      </div>
                       <div className="card-body">
-                        <div className="card-issuer">{cert.issuer}</div>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: ".5rem", marginBottom: ".45rem" }}>
+                          <div className="card-issuer" style={{ margin: 0 }}>
+                            {block.icon} {cert.issuer}
+                          </div>
+                          <span className="cat-tag" style={{ position: "static", flexShrink: 0 }}>{cert.demand}</span>
+                        </div>
                         <div className="card-title">{cert.name}</div>
-                        <div className="card-desc">
+                        <div className="card-desc" style={{ marginTop: ".2rem" }}>
                           {cert.level}
                           {expandedCert === cert.name && (
                             <> · <a href={cert.url} target="_blank" rel="noopener noreferrer"
                               onClick={e => e.stopPropagation()}
                               style={{ color: "var(--lime)", textDecoration: "none" }}>
-                              Ver certificación oficial →
+                              Ver oficial →
                             </a></>
                           )}
                         </div>
                         <div className="card-foot">
-                          <span className="card-date">{cert.demand} demanda</span>
+                          <span className="card-date">{cert.level}</span>
                           <div className="card-acts">
                             <a className="ca-btn" href={cert.url} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>
                               Oficial
@@ -332,7 +321,6 @@ export default function Dashboard() {
         </>
       )}
 
-      {/* ══ CV ══ */}
       {activeTab === "cv" && (
         <>
           <div style={{ maxWidth: 1380, margin: "0 auto", padding: "0 2.5rem .75rem" }}>
@@ -343,22 +331,17 @@ export default function Dashboard() {
           <div className="cards">
             {cvTemplates.map(tpl => (
               <article key={tpl.name} className="card General">
-                <div className="thumb">
-                  <div className="thumb-empty">
-                    <div className="thumb-empty-icon">{tpl.icon}</div>
-                    <div className="thumb-empty-hint">Plantilla CV</div>
-                  </div>
-                  <span className="cat-tag">{tpl.tag}</span>
-                  <div className="thumb-ov"><span className="view-chip">Configurar</span></div>
-                </div>
                 <div className="card-body">
-                  <div className="card-issuer">Plantilla · {tpl.tag}</div>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: ".5rem", marginBottom: ".45rem" }}>
+                    <div className="card-issuer" style={{ margin: 0 }}>{tpl.icon} Plantilla CV</div>
+                    <span className="cat-tag" style={{ position: "static", flexShrink: 0 }}>{tpl.tag}</span>
+                  </div>
                   <div className="card-title">{tpl.name}</div>
-                  <div className="card-desc">{tpl.focus}</div>
+                  <div className="card-desc" style={{ marginTop: ".2rem" }}>{tpl.focus}</div>
                   <div className="card-foot">
-                    <span className="card-date">PDF / ATS</span>
+                    <span className="card-date">DOC</span>
                     <div className="card-acts">
-                      <a className="ca-btn" href="/profile">Configurar</a>
+                      <a className="ca-btn" href={tpl.url} target="_blank" rel="noopener noreferrer">Descargar plantilla</a>
                     </div>
                   </div>
                 </div>
@@ -368,13 +351,11 @@ export default function Dashboard() {
         </>
       )}
 
-      {/* ══ COMPANIES ══ */}
       {activeTab === "companies" && (
         <>
           <div className="toolbar" style={{ paddingTop: 0 }}>
             <div className="filters">
               {allSectors.map(s => {
-                // FIX 2: mismo patrón — find con non-null assertion
                 const sectorData = companiesBySector.find(c => c.sector === s)!;
                 return (
                   <button
@@ -421,9 +402,6 @@ export default function Dashboard() {
                   </div>
                   <div className="card-foot">
                     <span className="card-date">{block.names.length} empresas</span>
-                    <div className="card-acts">
-                      <span className="ca-btn">Explorar roles</span>
-                    </div>
                   </div>
                 </div>
               </article>

@@ -25,7 +25,7 @@ const Login = () => {
     });
     if (res.ok) {
       showMessage("✅ Login correcto");
-      globalThis.location.replace("/profile");
+      globalThis.location.replace("/dashboard");
     } else {
       if (res.status === 429) {
         showMessage("❌ Demasiados intentos. Prueba mas tarde.");

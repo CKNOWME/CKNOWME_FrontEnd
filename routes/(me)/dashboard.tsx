@@ -1,6 +1,6 @@
-import Dashboard from "../../components/Dashboard.tsx"
+import DashboardIsland from "../../islands/DashboardIsland.tsx"
 
 const DashboardPage = () => {
-  return <Dashboard />
+  return <DashboardIsland />
 }
 export default DashboardPage
