@@ -89,11 +89,11 @@ const ImportCerts = () => {
         <span class="dot" /> Importar certificados
       </div>
       <h1 class="hero-title">Importar</h1>
-      <p class="hero-sub">Importa certificados desde Credly o desde HTML guardado de LinkedIn.</p>
+      <p class="hero-sub">Importa certificados desde Credly o desde LinkedIn.</p>
 
       <div class="form" style={{ maxWidth: "720px" }}>
         <div class="fg">
-          <label><span class="brand-pill li-pill"><span class="brand-dot li-dot">in</span>LinkedIn</span> HTML guardado</label>
+          <label><span class="brand-pill li-pill"><span class="brand-dot li-dot">in</span>LinkedIn</span> HTML</label>
           <div style={{ display: "flex", gap: ".5rem", flexWrap: "wrap" }}>
             <input
               type="text"
@@ -104,6 +104,7 @@ const ImportCerts = () => {
             <button class="btn-save" type="button" onClick={() => linkedinRef.current?.click()} disabled={linkedinLoading}>
               {linkedinLoading ? "Importando..." : "Importar LinkedIn"}
             </button>
+            <a href="/linkedin/import">Dont know how to get LinkedIn HTML?</a>
           </div>
           <input
             ref={linkedinRef}
