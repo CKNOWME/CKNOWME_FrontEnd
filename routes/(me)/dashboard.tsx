@@ -1,4 +1,4 @@
-import Dashboard from "../../components/dashboard.tsx"
+import Dashboard from "../../components/Dashboard.tsx"
 
 const DashboardPage = () => {
   return <Dashboard />
