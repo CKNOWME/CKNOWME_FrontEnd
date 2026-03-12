@@ -1,17 +1,39 @@
-# Fresh project
+# CKNOWME FrontEnd
 
-Your new Fresh project is ready to go. You can follow the Fresh "Getting
-Started" guide here: https://fresh.deno.dev/docs/getting-started
+Aplicación web para gestion de certificados profesionales.
 
-### Usage
+## Stack
 
-Make sure to install Deno:
-https://docs.deno.com/runtime/getting_started/installation
+- Fresh 2
+- Preact + Islands
+- Vite
 
-Then start the project in development mode:
+## Estructura
 
+- `main.ts`: endpoints `/api/*` (proxy).
+- `routes/`: páginas web.
+- `components/` e `islands/`: Componentes y islas interactivas.
+- `assets/` y `static/`: estilos y recursos.
+
+## Variables de entorno
+
+```env
+BACKEND_URL=https://cknowme-backend.sergioom9.deno.net
 ```
+
+## Ejecución
+
+```bash
 deno task dev
 ```
 
-This will watch the project directory and restart as necessary.
+Build + run:
+
+```bash
+deno task build
+deno task start
+```
+
+## Notas
+
+- La app consume `CKNOWME_BackEnd`.
