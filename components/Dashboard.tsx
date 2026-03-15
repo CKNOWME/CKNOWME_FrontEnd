@@ -177,10 +177,10 @@ export default function Dashboard() {
           <span className="dot" /> Career Dashboard
         </div>
         <h1 className="hero-title">
-          Recomendaciones <em>personalizadas</em>
+          Recomendaciones
         </h1>
         <p className="hero-sub">
-          Certificaciones reales · Plantillas de CV · Empresas por sector
+          Certificaciones · Plantillas para tu CV · Empresas
         </p>
       </section>
 
@@ -213,7 +213,7 @@ export default function Dashboard() {
                 <input
                   value={search}
                   onChange={e => setSearch((e.target as HTMLInputElement).value)}
-                  placeholder="Buscar certificación o emisor…"
+                  placeholder="Buscar certificación"
                 />
               </label>
               <div className="filters">
@@ -390,7 +390,7 @@ export default function Dashboard() {
                           display: "flex", justifyContent: "space-between", alignItems: "center",
                           background: "var(--s2)", borderRadius: "var(--rads)",
                           padding: ".4rem .72rem", textDecoration: "none",
-                          color: "var(--td)", fontFamily: "var(--fm)", fontSize: ".72rem",
+                          color: "#ffffff", fontFamily: "var(--fm)", fontSize: ".72rem",
                           border: "1px solid transparent", transition: "border-color .18s, color .18s",
                         }}
                         onMouseEnter={e => { e.currentTarget.style.borderColor = "var(--b1)"; e.currentTarget.style.color = "var(--tx)"; }}

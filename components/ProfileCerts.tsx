@@ -138,7 +138,7 @@ const ProfileCerts = () => {
           </div>
           <div>
             <span class="mini-n">{thisYear}</span>
-            <span>Este ano</span>
+            <span>Este año</span>
           </div>
         </div>
       </div>

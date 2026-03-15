@@ -14,9 +14,9 @@ const SearchMember = () => {
     <div style={{ marginTop: "2rem" }}>
     <section class="hero">
       <h1 class="hero-title">
-        Search for a member !
+        Busca a un usuario !
       </h1>
-    <form class="search" style={{ maxWidth: "420px" }} onSubmit={onSubmit}>
+    <form class="search" style={{ maxWidth: "350px" }} onSubmit={onSubmit}>
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
         stroke="currentColor" stroke-width="2" aria-hidden="true">
         <circle cx="11" cy="11" r="8" />
@@ -24,7 +24,7 @@ const SearchMember = () => {
       </svg>
       <input
         type="search"
-        placeholder="Busca por username"
+        placeholder="Introduce el usuario"
         value={query}
         onInput={(e) => setQuery((e.target as HTMLInputElement).value)}
       />
