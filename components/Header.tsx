@@ -6,7 +6,7 @@ const Header = () => {
       <div class="header-in">
         <a class="logo" href="/">
           <span class="logo-g">◈</span>
-          <span class="logo-t">CertFolio</span>
+          <span class="logo-t">CKNOWME</span>
         </a>
         <div style={{ display: "flex", gap: ".6rem", alignItems: "center" }}>
           <a href="/certs/add">
