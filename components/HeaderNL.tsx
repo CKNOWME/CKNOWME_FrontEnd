@@ -4,7 +4,7 @@ const HeaderNL = () => {
       <div class="header-in">
         <a class="logo" href="/">
           <span class="logo-g">◈</span>
-          <span class="logo-t">CKnowMe</span>
+          <span class="logo-t">CKNOWME</span>
         </a>
         <div style={{ display: "flex", gap: ".6rem" }}>
           <a href="/login" class="btn-secondary">Login</a>
